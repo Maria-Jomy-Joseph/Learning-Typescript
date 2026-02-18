@@ -52,6 +52,52 @@ type Details4 = {
     getname?: () => void; //Now this function is optional, it may or may not be present in the object
 }
 
+let adminDetails5: Details4 = { name: "John", age: "30" }; // here the function getname is not present, but it's fine because it's optional
+
+//Functions
+function getUserName(user: Details4) {
+  return user.name;
+}
+
+getUserName(adminDetails5);
+
+function getUserName1({name, age}: {name: string; age : number}) {
+  return name;
+}
+
+getUserName1({ name : "john", age: 30 });
 
 
-let adminDetails5: Details4 = { name: "John", age: "30" }; // here the age can be string as well
+function getUser(user: Details4): string { // specifying return type as string
+  return user.name;
+}
+
+const newValue = getUser(adminDetails5);
+
+function getUser1(user: Details4): Details4 { // custom types can be returned too
+  return user;
+}
+
+function getUser2(user: Details4): void { // if the function is not returning anything, then void type can be used
+  console.log(user.name);
+}
+
+//Named types
+
+type Status = "pending" | "completed" | "failed" | ""; // this is a custom type that can only have one of the three values
+//and this is not possible with interfaces, it needs objects
+
+let currentStatus: Status = ""; // currentStatus can only be one of the three values defined in the Status type
+
+// from API response
+const response = "pending";
+
+if(response === "pending"){
+    currentStatus = "pending";
+}
+
+type ToggleSwitch = "on" | "off";
+let toggleSwitch: ToggleSwitch = "off";
+
+toggleSwitch = "on";
+
